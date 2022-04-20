@@ -23,8 +23,8 @@ spec:
         imagePullPolicy: Always
         resources: {}
         ports:
-        - containerPort: 80 
-        - containerPort: 443
+          - containerPort: 80 
+          - containerPort: 443
 status: {}
 
 ---
@@ -37,14 +37,14 @@ metadata:
     run: nodeapp
 spec:
   ports:
-    - name: http
-      protocol: TCP
-      port: 80
-      targetPort: 3000
-    - name: https
-      protocol: TCP
-      port: 443
-      targetPort: 3000
+  - name: http
+    protocol: TCP
+    port: 80
+    targetPort: 3000
+  - name: https
+    protocol: TCP
+    port: 443
+    targetPort: 3000
   selector:
     app: nodeapp
   type: NodePort
