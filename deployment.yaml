@@ -37,9 +37,14 @@ metadata:
     run: nodeapp
 spec:
   ports:
-  - port: 80
-    targetPort: 3000
-    protocol: TCP
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 3000
+    - name: https
+      protocol: TCP
+      port: 443
+      targetPort: 3000
   selector:
     app: nodeapp
   type: LoadBalancer

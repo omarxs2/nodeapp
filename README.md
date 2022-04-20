@@ -1,23 +1,28 @@
 # Deploy Nodeapp
 
 ```
+
+gcloud container clusters create nodeapp-cluster \
+    --project=wideops-candidate6 \
+    --zone=us-central1-c
+
 docker build -t gcr.io/wideops-candidate6/omar-nodeapp:test .
 
 docker push gcr.io/wideops-candidate6/omar-nodeapp:test
-
 
 gcloud container clusters get-credentials "nodeapp-cluster" \
             --project "wideops-candidate6" \
             --zone "us-central1-c" 
 
 
-kubectl create/apply -f manifest.yml
+kubectl apply -f deployment.yaml
 
-kubectl autoscale deployment rc omar-nodeapp --min=2 --max=8 omar-nodeapp
+kubectl autoscale deployment omar-nodeapp --cpu-percent=50 --min=2 --max=8 
 
 kubectl get deployments
 kubectl get pods
 kubectl get services
+kubectl get hpa
 
 
 For auto versioning:
