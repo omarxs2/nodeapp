@@ -21,7 +21,7 @@ spec:
   tls:
   - hosts:
     - tls.omar-nodeapp.com
-    secretNme: nodeapp-tls
+    secretName: nodeapp-tls
   backend: 
     serviceName: nodeapp-secured
     sericePort: 443
