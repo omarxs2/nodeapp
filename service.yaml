@@ -8,6 +8,9 @@ spec:
   - port: 80
     protocol: TCP
     targetPort: 3000
+  - port: 443
+    protocol: TCP
+    targetPort: 3000
   selector:
     run: nodeapp
   type: NodePort
