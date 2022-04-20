@@ -23,6 +23,7 @@ sudo systemctl status mongod
 
 # Firewall: 
 
+Open ports to be able to access the DB
 ```
 sudo lsof -i | grep mongo
 
@@ -40,7 +41,6 @@ sudo ufw status
 - Other Commands:
 sudo ufw delete allow ssh
 sudo ufw allow from Anywhere to any port 27017
-
 ```
 
 
@@ -56,7 +56,7 @@ sudo systemctl restart mongod
 
 # ReplicaSet 
 
-Adding DNS for IPs (Optional)
+Adding DNS for IPs (Optional):
 
 ```
 sudo nano /etc/hosts
@@ -72,6 +72,7 @@ sudo ufw allow from mongo2_server_ip to any port 27017
 ```
 
 
+Configuring replication:
 ```
 sudo nano /etc/mongod.conf
 
@@ -92,6 +93,7 @@ sudo systemctl restart mongod
 
 At mongo shell:
 
+1- Initiate ReplicaSet:
 ```
 rs.initiate(
 ... {
@@ -103,26 +105,27 @@ rs.initiate(
 ... })
 ```
 
+2- Activate Seconery DB by:
 ```
-- Main Commands:
-rs.addArb(hostportstr)
 rs.secondaryOk()
+```
+
+```
+- Other Commands:
+rs.addArb(hostportstr)
 rs.add("34.141.19.170")
 rs.remove("mongo0master.replset.member:27017")
-
 ```
 
 
 
 # Auth:
 
-go to mongo shell: 
-
-```mongo```
-
-```use admin```
+1- At mongo shell: 
 
 ```
+use admin
+
 db.createUser({
 user: "admin",
 pwd: "admin",
@@ -137,7 +140,7 @@ roles:[
 })
 ```
 
-
+Other roles:
 ```
 for super admin:
 readWriteAnyDatabase
@@ -149,10 +152,12 @@ userAdmin
 ```
 
 ```
-enable auth in config
 
+
+2- Enable auth in config
+
+```
 sudo nano /etc/mongod.conf
-
 security:
   authorization: enabled
 
