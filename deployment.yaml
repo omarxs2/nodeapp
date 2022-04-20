@@ -24,6 +24,7 @@ spec:
         resources: {}
         ports:
           - containerPort: 80 
+          - containerPort: 443
 status: {}
 
 
