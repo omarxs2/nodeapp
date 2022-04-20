@@ -6,9 +6,9 @@ docker build -t gcr.io/wideops-candidate6/omar-nodeapp:test .
 docker push gcr.io/wideops-candidate6/omar-nodeapp:test
 
 
-gcloud container clusters get-credentials "omar-cluster" \
+gcloud container clusters get-credentials "nodeapp-cluster" \
             --project "wideops-candidate6" \
-            --zone "us-west2-a" 
+            --zone "us-central1-c" 
 
 
 kubectl create/apply -f manifest.yml
