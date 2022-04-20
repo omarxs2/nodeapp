@@ -16,6 +16,25 @@ spec:
   selector:
     run: nodeapp
   type: NodePort
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodeapp-secured
+  namespace: default
+  annotations:
+    cloud.google.com-ap-protocols: '{"nodeapp-tls":"HTTPS"}'
+spec:
+  ports:
+  - port: 443
+    protocol: TCP
+    targetPort: 3000
+    name: https
+  selector:
+    run: nodeapp
+  type: NodePort
 ---
 
 # apiVersion: v1
