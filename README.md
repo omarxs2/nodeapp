@@ -17,12 +17,13 @@ gcloud container clusters get-credentials "nodeapp-cluster" \
 
 kubectl apply -f deployment.yaml
 
-kubectl autoscale deployment omar-nodeapp --cpu-percent=50 --min=2 --max=8 
+kubectl autoscale deployment omar-nodeapp --cpu-percent=70 --min=2 --max=10 
 
 kubectl get deployments
 kubectl get pods
 kubectl get services
 kubectl get hpa
+kubectl get ingresses
 
 
 For auto versioning:
