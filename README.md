@@ -14,6 +14,9 @@ sudo apt install mongodb-org
 sudo systemctl enable mongod --now
 
 mongo --eval 'db.runCommand({ connectionStatus: 1 })'
+
+sudo systemctl status mongod
+
 ```
 
 
@@ -32,10 +35,12 @@ sudo ufw allow 22/tcp
 sudo ufw allow 2222/tcp
 sudo ufw allow 27017
 
-#sudo ufw delete allow ssh
-#sudo ufw allow from Anywhere to any port 27017
-
 sudo ufw status
+
+- Other Commands:
+sudo ufw delete allow ssh
+sudo ufw allow from Anywhere to any port 27017
+
 ```
 
 
@@ -43,29 +48,33 @@ sudo ufw status
 
 ```
 sudo nano /etc/mongod.conf
-(add 0.0.0.0 to bindIp)
+(add 0.0.0.0 to bindIp or bindIpAll: true)
 
 sudo systemctl restart mongod
-sudo systemctl status mongod
 ```
 
 
 # ReplicaSet 
 
+Adding DNS for IPs (Optional)
+
+```
 sudo nano /etc/hosts
 
 203.0.113.0 mongo0.replset.member
 203.0.113.1 mongo1.replset.member
-203.0.113.2 mongo2.replset.member
 
 sudo ufw allow from mongo1_server_ip to any port 27017
 sudo ufw allow from mongo2_server_ip to any port 27017
 
 sudo ufw allow from mongo0_server_ip to any port 27017
 sudo ufw allow from mongo2_server_ip to any port 27017
+```
+
 
 ```
 sudo nano /etc/mongod.conf
+
 network interfaces
 net:
   port: 27017
@@ -78,7 +87,7 @@ replication:
 sudo systemctl restart mongod
 ```
 
-# Starting replicaset in one machine
+## Starting replicaset in one machine
 
 
 At mongo shell:
@@ -95,15 +104,12 @@ rs.initiate(
 ```
 
 ```
+- Main Commands:
 rs.addArb(hostportstr)
 rs.secondaryOk()
-
 rs.add("34.141.19.170")
-rs.add("34.89.166.117")
-
 rs.remove("mongo0master.replset.member:27017")
-rs.remove("mongo1slave.replset.member:27017")
-rs.remove("mongo2arbiter.replset.member:27017")
+
 ```
 
 
