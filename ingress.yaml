@@ -5,7 +5,7 @@ metadata:
 spec:
   defaultBackend:
     service:
-      name: nodeapp-service
+      name: nodeapp
       port:
         number: 80
 ---
