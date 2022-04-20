@@ -1,6 +1,6 @@
+# Deploy MongoDB:
 
-Deploy MongoDB:
-
+```
 sudo apt install dirmngr gnupg apt-transport-https software-properties-common ca-certificates curl lsof ufw
 
 curl -fsSL https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -
@@ -14,12 +14,13 @@ sudo apt install mongodb-org
 sudo systemctl enable mongod --now
 
 mongo --eval 'db.runCommand({ connectionStatus: 1 })'
-
-####################### 
-
-Firewall: 
+```
 
 
+
+# Firewall: 
+
+```
 sudo lsof -i | grep mongo
 
 sudo ufw enable
@@ -35,17 +36,19 @@ sudo ufw allow 27017
 #sudo ufw allow from Anywhere to any port 27017
 
 sudo ufw status
+```
 
--------
-Config:
 
+# Config:
+
+```
 sudo nano /etc/mongod.conf
 (add 0.0.0.0 to bindIp)
 
 sudo systemctl restart mongod
 sudo systemctl status mongod
+```
 
-### 
 
 # ReplicaSet 
 
@@ -61,9 +64,9 @@ sudo ufw allow from mongo2_server_ip to any port 27017
 sudo ufw allow from mongo0_server_ip to any port 27017
 sudo ufw allow from mongo2_server_ip to any port 27017
 
-
+```
 sudo nano /etc/mongod.conf
-# network interfaces
+network interfaces
 net:
   port: 27017
   bindIp: 127.0.0.1,35.238.178.61
@@ -73,9 +76,14 @@ replication:
   replSetName: "rs0"
 
 sudo systemctl restart mongod
+```
 
 # Starting replicaset in one machine
-mongo
+
+
+At mongo shell:
+
+```
 rs.initiate(
 ... {
 ... _id: "rs0",
@@ -84,9 +92,9 @@ rs.initiate(
 ... { _id: 1, host: "35.238.178.61" }
 ... ]
 ... })
+```
 
-
-
+```
 rs.addArb(hostportstr)
 rs.secondaryOk()
 
@@ -96,20 +104,19 @@ rs.add("34.89.166.117")
 rs.remove("mongo0master.replset.member:27017")
 rs.remove("mongo1slave.replset.member:27017")
 rs.remove("mongo2arbiter.replset.member:27017")
+```
 
 
-
-
-### 
 
 # Auth:
 
-go to mongo shell : 
+go to mongo shell: 
 
-mongo
+```mongo```
 
-use admin
+```use admin```
 
+```
 db.createUser({
 user: "admin",
 pwd: "admin",
@@ -122,19 +129,20 @@ roles:[
 "dbAdminAnyDatabase"
 ]
 })
+```
 
 
-
-
+```
 for super admin:
 readWriteAnyDatabase
 dbAdminAnyDatabase
 userAdminAnyDatabase
 clusterAdmin
-
 dbOwner 
 userAdmin
------ 
+```
+
+```
 enable auth in config
 
 sudo nano /etc/mongod.conf
@@ -144,13 +152,4 @@ security:
 
 sudo systemctl restart mongod
 sudo systemctl status mongod
-
---------------
-
-mongodb://omar:omar1234@34.136.16.228:27017/test
-
-
-rs.add( { host: "34.141.19.170:27017" } )
-
-
-
+```
