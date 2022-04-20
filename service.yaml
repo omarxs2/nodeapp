@@ -9,50 +9,25 @@ spec:
     protocol: TCP
     targetPort: 3000
     name: http
-  - port: 443
-    protocol: TCP
-    targetPort: 3000
-    name: https
   selector:
     run: nodeapp
   type: NodePort
 
----
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: nodeapp-secured
-  namespace: default
-  annotations:
-    cloud.google.com-ap-protocols: '{"nodeapp-tls":"HTTPS"}'
-spec:
-  ports:
-  - port: 443
-    protocol: TCP
-    targetPort: 3000
-    name: https
-  selector:
-    run: nodeapp
-  type: NodePort
 ---
 
 # apiVersion: v1
 # kind: Service
 # metadata:
-#   name: omar-nodeapp-service
-#   labels:
-#     run: nodeapp
+#   name: nodeapp-secured
+#   namespace: default
+#   annotations:
+#     cloud.google.com-ap-protocols: '{"nodeapp-tls":"HTTPS"}'
 # spec:
 #   ports:
-#   - name: http
+#   - port: 443
 #     protocol: TCP
-#     port: 80
 #     targetPort: 3000
-#   - name: https
-#     protocol: TCP
-#     port: 443
-#     targetPort: 3000
+#     name: https
 #   selector:
-#     app: nodeapp
-#   type: LoadBalancer
+#     run: nodeapp
+#   type: NodePort

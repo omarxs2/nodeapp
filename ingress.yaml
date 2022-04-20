@@ -11,17 +11,31 @@ spec:
 
 ---
 
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: nodeapp-ingress-https
-  annotations:
-    kubernetes.io/ingress.allow-http: "false"
-spec:
-  tls:
-  - hosts:
-    - tls.omar-nodeapp.com
-    secretName: nodeapp-tls
-  backend: 
-    serviceName: nodeapp-secured
-    sericePort: 443
+# apiVersion: "networking.k8s.io/v1"
+# kind: "Ingress"
+# metadata:
+#   name: nodeapp-ingress-https
+#   namespace: "default"
+#   annotations:
+#     networking.gke.io/managed-certificates: "test-cert"
+#     kubernetes.io/ingress.allow-http: "false"
+# spec:
+#   defaultBackend:
+#     service:
+#       name: "nodeapp-secured"
+#       port:
+#         number: 443
+#   rules:
+#   - http:
+#       paths:
+#       - path: "/"
+#         backend:
+#           service:
+#             name: "nodeapp-secured"
+#             port:
+#               number: 443
+#         pathType: "ImplementationSpecific"
+#     host: "app.omar-nodeapp.com"
+# status:
+#   loadBalancer: {}
+
