@@ -5,12 +5,14 @@ metadata:
   namespace: default
 spec:
   ports:
-    - port: 80
-      protocol: TCP
-      targetPort: 3000
-    - port: 443
-      protocol: TCP
-      targetPort: 3000
+  - port: 80
+    protocol: TCP
+    targetPort: 3000
+    name: http
+  - port: 443
+    protocol: TCP
+    targetPort: 3000
+    name: https
   selector:
     run: nodeapp
   type: NodePort
