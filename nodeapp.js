@@ -16,7 +16,7 @@ const options = {
   socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
   family: 4 // Use IPv4, skip trying IPv6
 }
-
+ 
 const replicaSet = 'mongodb://104.197.154.17:27017,35.238.178.61:27017/docker-node-mongo?replicaSet=rs0'
 
 // Connect to MongoDB
