@@ -1,3 +1,32 @@
+# Deploy Nodeapp
+
+```
+docker build -t gcr.io/wideops-candidate6/omar-nodeapp:test .
+
+docker push gcr.io/wideops-candidate6/omar-nodeapp:test
+
+
+gcloud container clusters get-credentials "omar-cluster" \
+            --project "wideops-candidate6" \
+            --zone "us-west2-a" 
+
+
+kubectl create/apply -f manifest.yml
+
+kubectl autoscale deployment rc omar-nodeapp --min=2 --max=8 omar-nodeapp
+
+kubectl get deployments
+kubectl get pods
+kubectl get services
+
+
+For auto versioning:
+docker push gcr.io/wideops-candidate6/omar-nodeapp:${SHORT_SHA}
+sed -i 's|gcr.io/devops-343007/omar-react-image:.*|gcr.io/devops-343007/omar-react-image:${SHORT_SHA}|' manifest.yml
+
+```
+
+
 # Deploy MongoDB:
 
 ```
@@ -116,7 +145,6 @@ rs.addArb(hostportstr)
 rs.add("34.141.19.170")
 rs.remove("mongo0master.replset.member:27017")
 ```
-
 
 
 # Auth:
