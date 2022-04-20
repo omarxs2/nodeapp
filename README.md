@@ -1,4 +1,4 @@
-<!-- 
+
 Deploy MongoDB:
 
 sudo apt install dirmngr gnupg apt-transport-https software-properties-common ca-certificates curl lsof ufw
@@ -153,4 +153,4 @@ mongodb://omar:omar1234@34.136.16.228:27017/test
 rs.add( { host: "34.141.19.170:27017" } )
 
 
- -->
+
