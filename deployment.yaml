@@ -4,7 +4,7 @@ metadata:
   creationTimestamp: null
   labels:
     app: nodeapp
-  name: omar-nodeapp
+  name: nodeapp
 spec:
   replicas: 2
   selector:
@@ -19,10 +19,10 @@ spec:
     spec:
       containers:
       - image: gcr.io/wideops-candidate6/omar-nodeapp:test
-        name: omar-webapp
+        name: nodeapp
         imagePullPolicy: Always
         resources: {}
         ports:
-          - containerPort: 80 
+        - containerPort: 80 
 status: {}
 ---

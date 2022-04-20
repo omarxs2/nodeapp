@@ -33,4 +33,4 @@ spec:
 #     targetPort: 3000
 #   selector:
 #     app: nodeapp
-#   type: NodePort
+#   type: LoadBalancer
