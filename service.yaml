@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodeapp-service
+  labels:
+    run: nodeapp
+  namespace: default
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    run: nodeapp-service
+  type: NodePort
+---
+
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: omar-nodeapp-service
+#   labels:
+#     run: nodeapp
+# spec:
+#   ports:
+#   - name: http
+#     protocol: TCP
+#     port: 80
+#     targetPort: 3000
+#   - name: https
+#     protocol: TCP
+#     port: 443
+#     targetPort: 3000
+#   selector:
+#     app: nodeapp
+#   type: NodePort
