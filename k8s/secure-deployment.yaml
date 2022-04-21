@@ -58,11 +58,13 @@ metadata:
     networking.gke.io/managed-certificates: my-cert
 spec:
   rules:
-    - host: sec.omar-nodeapp.com
-      http:
-        paths:
-          - path: /
-            backend:
-              serviceName: secure-nodeapp
-              servicePort: 80
+  - host: sec.omar-nodeapp.com
+    http:
+      paths:
+      - path: /
+        backend:
+          service:
+            name: secure-nodeapp
+            port:
+              number: 80
 
