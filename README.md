@@ -17,7 +17,7 @@ gcloud container clusters get-credentials "nodeapp-cluster" \
 
 kubectl apply -f deployment.yaml
 
-kubectl autoscale deployment omar-nodeapp --cpu-percent=70 --min=2 --max=10 
+kubectl autoscale deployment nodeapp --cpu-percent=70 --min=2 --max=10 
 
 kubectl get deployments
 kubectl get pods
@@ -25,6 +25,7 @@ kubectl get services
 kubectl get hpa
 kubectl get ingresses
 
+gcloud compute addresses create my-global --global
 
 For auto versioning:
 docker push gcr.io/wideops-candidate6/omar-nodeapp:${SHORT_SHA}
@@ -148,7 +149,7 @@ rs.secondaryOk()
 ```
 - Other Commands:
 rs.addArb(hostportstr)
-rs.add("34.141.19.170")
+rs.add("34.71.97.128")
 rs.remove("mongo0master.replset.member:27017")
 ```
 
