@@ -59,10 +59,10 @@ metadata:
 spec:
   rules:
     - host: sec.omar-nodeapp.com
-    http:
-      paths:
-        - path: /
-          backend:
-            serviceName: secure-nodeapp
-            servicePort: 80
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: secure-nodeapp
+              servicePort: 80
 
