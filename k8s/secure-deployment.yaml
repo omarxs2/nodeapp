@@ -61,7 +61,7 @@ spec:
   - host: sec.omar-nodeapp.com
     http:
       paths:
-      - path: /*
+      - path: "/"
         pathType: Prefix
         backend:
           service:
