@@ -2,7 +2,7 @@
 
 ```
 
-<!-- Steps: -->
+Steps:
 gcloud container clusters create nodeapp-cluster \
     --project=wideops-candidate6 \
     --zone=us-central1-c
@@ -16,21 +16,21 @@ gcloud container clusters get-credentials "nodeapp-cluster" \
             --zone "us-central1-c" 
 
 
-kubectl apply -f deployment.yaml
+kubectl apply -f k8s/secure-deployment.yaml
 
 kubectl autoscale deployment nodeapp --cpu-percent=70 --min=2 --max=10 
 
-<!-- other commands: -->
+other commands:
 kubectl get deployments
 kubectl get pods
 kubectl get services
 kubectl get hpa
 kubectl get ingresses
 
-<!-- Create a static ip to be connected with my domain -->
+Create a static ip to be connected with my domain
 gcloud compute addresses create my-global --global
 
-<!-- For auto versioning: -->
+For auto versioning:
 docker push gcr.io/wideops-candidate6/omar-nodeapp:${SHORT_SHA}
 sed -i 's|gcr.io/devops-343007/omar-react-image:.*|gcr.io/devops-343007/omar-react-image:${SHORT_SHA}|' manifest.yml
 
@@ -41,7 +41,7 @@ sed -i 's|gcr.io/devops-343007/omar-react-image:.*|gcr.io/devops-343007/omar-rea
 
 ```
 
-<!-- Steps: -->
+Steps:
 
 sudo apt install dirmngr gnupg apt-transport-https software-properties-common ca-certificates curl lsof ufw
 
@@ -192,19 +192,16 @@ roles:[
 "dbAdminAnyDatabase"
 ]
 })
-```
 
 Other roles:
-```
-for super admin:
 readWriteAnyDatabase
 dbAdminAnyDatabase
 userAdminAnyDatabase
 clusterAdmin
 dbOwner 
 userAdmin
-```
 
+```
 
 
 2- Enable auth in config
