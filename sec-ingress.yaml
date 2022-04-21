@@ -4,7 +4,7 @@ metadata:
   name: managed-cert-ingress
   annotations:
     kubernetes.io/ingress.global-static-ip-name: my-global
-    networking.gke.io/managed-certificates: managed-cert
+    networking.gke.io/managed-certificates: managed-cer
     kubernetes.io/ingress.class: "gce"
 spec:
   defaultBackend:
@@ -12,3 +12,21 @@ spec:
       name: nodeapp-secure
       port:
         number: 80
+
+
+# ---
+# apiVersion: "networking.k8s.io/v1"
+# kind: "Ingress"
+# metadata:
+#   name: "ingress-test"
+#   namespace: "default"
+#   annotations:
+#     networking.gke.io/managed-certificates: "managed-cert"
+# spec:
+#   defaultBackend:
+#     service:
+#       name: "nodeapp-secure"
+#       port:
+#         number: 80
+# status:
+#   loadBalancer: {}
