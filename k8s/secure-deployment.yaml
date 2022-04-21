@@ -1,0 +1,68 @@
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: nodeapp
+#   namespace: default
+# spec:
+#   replicas: 2
+#   selector:
+#     matchLabels:
+#       run: nodeapp
+#   strategy: {}
+#   template:
+#     metadata:
+#       labels:
+#         run: nodeapp
+#     spec:
+#       containers:
+#       - image: gcr.io/wideops-candidate6/omar-nodeapp:test
+#         name: nodeapp
+#         ports:
+#         - containerPort: 
+#
+# ---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: secure-nodeapp
+  namespace: default
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 3000
+    name: http
+  selector:
+    run: nodeapp
+  type: NodePort
+
+---
+
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: my-cert
+spec:
+  domains:
+    - sec.omar-nodeapp.com
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: managed-ingress
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: my-global-2
+    networking.gke.io/managed-certificates: my-cert
+spec:
+  rules:
+    - host: sec.omar-nodeapp.com
+    http:
+      paths:
+        - path: /
+          backend:
+            serviceName: secure-nodeapp
+            servicePort: 80
+

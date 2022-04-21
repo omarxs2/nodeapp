@@ -1,9 +1,9 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: managed-cert-ingress
+  name: managed-cert-ingress-2
   annotations:
-    kubernetes.io/ingress.global-static-ip-name: my-global
+    # kubernetes.io/ingress.global-static-ip-name: my-global
     networking.gke.io/managed-certificates: managed-cer
     kubernetes.io/ingress.class: "gce"
 spec:
@@ -11,7 +11,7 @@ spec:
     service:
       name: nodeapp-secure
       port:
-        number: 80
+        number: 443
 
 
 # ---
