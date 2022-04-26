@@ -16,9 +16,11 @@ spec:
     spec:
       containers:
       - image: gcr.io/omar-devops/omar-nodeapp:test
+        imagePullPolicy: IfNotPresent
         name: nodeapp
         ports:
-        - containerPort: 
+        - containerPort: 80
+          protocol: TCP 
 
 ---
 
