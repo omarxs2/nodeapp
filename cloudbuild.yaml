@@ -5,12 +5,12 @@ steps:
 ### Build
   - id: 'build'
     name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'docker push gcr.io/omar-devops/omar-nodeapp:${SHORT_SHA}', '.' ]
+    args: ['build', '-t', 'gcr.io/omar-devops/omar-nodeapp:${SHORT_SHA}', '.' ]
 
 ## Push / Publish
   - id: 'push'
     name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'docker push gcr.io/omar-devops/omar-nodeapp:${SHORT_SHA}']
+    args: ['push', 'gcr.io/omar-devops/omar-nodeapp:${SHORT_SHA}']
 
 ### Deploy
   - id: 'deploy'
