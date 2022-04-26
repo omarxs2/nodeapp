@@ -1,3 +1,9 @@
+# Nodeapp Architecture
+
+a simple node app that will be deployed on GCP kubernetes enginge with 2-10 autoscaled pods and connected to a mongodb replicaset deployed on compute engines.
+
+![alt text](https://github.com/omarxs2/nodeapp/blob/main/nodeapp.png?raw=true)
+
 # Deploy Nodeapp
 
 ```
