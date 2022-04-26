@@ -1,26 +1,26 @@
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: nodeapp
-#   namespace: default
-# spec:
-#   replicas: 2
-#   selector:
-#     matchLabels:
-#       run: nodeapp
-#   strategy: {}
-#   template:
-#     metadata:
-#       labels:
-#         run: nodeapp
-#     spec:
-#       containers:
-#       - image: gcr.io/wideops-candidate6/omar-nodeapp:test
-#         name: nodeapp
-#         ports:
-#         - containerPort: 
-#
-# ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodeapp
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      run: nodeapp
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        run: nodeapp
+    spec:
+      containers:
+      - image: gcr.io/omar-devops/omar-nodeapp:test
+        name: nodeapp
+        ports:
+        - containerPort: 
+
+---
 
 apiVersion: v1
 kind: Service
@@ -54,7 +54,7 @@ kind: Ingress
 metadata:
   name: managed-ingress
   annotations:
-    kubernetes.io/ingress.global-static-ip-name: my-global-2
+    kubernetes.io/ingress.global-static-ip-name: my-global
     networking.gke.io/managed-certificates: my-cert
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:

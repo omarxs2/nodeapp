@@ -1,0 +1,38 @@
+### Copyright 2022 Omar Suleiman
+
+steps:
+
+### Build
+  - id: 'build'
+    name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'docker push gcr.io/omar-devops/omar-nodeapp:${SHORT_SHA}', '.' ]
+
+## Push / Publish
+  - id: 'push'
+    name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'docker push gcr.io/omar-devops/omar-nodeapp:${SHORT_SHA}']
+
+### Deploy
+  - id: 'deploy'
+    name: 'gcr.io/cloud-builders/gcloud'
+    env:
+      - 'KUBECONFIG=/kube/config'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        
+          gcloud container clusters get-credentials "nodeapp-cluster" \
+              --project "omar-devops" \
+              --zone "us-central1-c" 
+          
+          sed -i 's|gcr.io/omar-devops/omar-nodeapp:.*|gcr.io/omar-devops/omar-nodeapp:${SHORT_SHA}|' ./k8s/secure-deployment.yaml
+          
+          kubectl apply -f k8s/secure-deployment.yaml
+
+          kubectl autoscale deployment nodeapp --cpu-percent=70 --min=2 --max=10
+
+### Timeout
+timeout: "1600s"
+options:
+ logging: CLOUD_LOGGING_ONLY

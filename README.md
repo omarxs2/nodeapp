@@ -4,7 +4,7 @@
 
 Steps:
 gcloud container clusters create nodeapp-cluster \
-    --project=wideops-candidate6 \
+    --project=omar-devops \
     --zone=us-central1-c
 
 docker build -t gcr.io/wideops-candidate6/omar-nodeapp:test .
@@ -16,19 +16,20 @@ gcloud container clusters get-credentials "nodeapp-cluster" \
             --zone "us-central1-c" 
 
 
+# Create a static ip to be connected with my domain:
+gcloud compute addresses create my-global --global
+
 kubectl apply -f k8s/secure-deployment.yaml
 
 kubectl autoscale deployment nodeapp --cpu-percent=70 --min=2 --max=10 
 
-other commands:
+
+Other commands:
 kubectl get deployments
 kubectl get pods
 kubectl get services
 kubectl get hpa
 kubectl get ingresses
-
-Create a static ip to be connected with my domain
-gcloud compute addresses create my-global --global
 
 For auto versioning:
 docker push gcr.io/wideops-candidate6/omar-nodeapp:${SHORT_SHA}
