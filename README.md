@@ -4,7 +4,7 @@
 
 Steps:
 gcloud container clusters create nodeapp-cluster \
-    --project=omar-devops \
+    --project=wideops-candidate6 \
     --zone=us-central1-c
 
 docker build -t gcr.io/wideops-candidate6/omar-nodeapp:test .
@@ -171,7 +171,7 @@ rs.addArb("mongodb-arbiter-ip:27017")
 4- Other Commands:
 ```
 rs.add("34.71.97.128")
-rs.remove("mongo0master.replset.member:27017")
+rs.remove("34.71.97.128:27017")
 ```
 
 # Auth: (Imprtant for security)
