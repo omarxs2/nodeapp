@@ -70,5 +70,5 @@ spec:
           service:
             name: secure-nodeapp
             port:
-              number: 80
+              number: 3000
 
