@@ -1,30 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  creationTimestamp: null
-  labels:
-    app: nodeapp
   name: nodeapp
+  namespace: default
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: nodeapp
+      run: nodeapp
   strategy: {}
   template:
     metadata:
-      creationTimestamp: null
       labels:
-        app: nodeapp
+        run: nodeapp
     spec:
       containers:
       - image: gcr.io/wideops-candidate6/omar-nodeapp:test
+        imagePullPolicy: IfNotPresent
         name: nodeapp
-        imagePullPolicy: Always
-        resources: {}
         ports:
-        - containerPort: 80 
-status: {}
+        - containerPort: 80
+          protocol: TCP 
 
 ---
 
@@ -60,7 +56,7 @@ kind: Ingress
 metadata:
   name: managed-ingress
   annotations:
-    kubernetes.io/ingress.global-static-ip-name: my-global
+    kubernetes.io/ingress.global-static-ip-name: my-global-2
     networking.gke.io/managed-certificates: my-cert
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
