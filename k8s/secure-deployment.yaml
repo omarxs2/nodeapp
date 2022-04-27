@@ -19,7 +19,7 @@ spec:
         imagePullPolicy: IfNotPresent
         name: nodeapp
         ports:
-        - containerPort: 80
+        - containerPort: 3000
           protocol: TCP 
 
 ---
@@ -58,7 +58,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.global-static-ip-name: my-global
     networking.gke.io/managed-certificates: my-cert
-    # nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
   - host: sec.omar-nodeapp.com

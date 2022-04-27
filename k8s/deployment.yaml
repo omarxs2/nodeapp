@@ -15,11 +15,11 @@ spec:
         run: nodeapp
     spec:
       containers:
-      - image: gcr.io/wideops-candidate6/omar-nodeapp:test
+      - image: gcr.io/wideops-candidate6/omar-nodeapp:v2
         imagePullPolicy: IfNotPresent
         name: nodeapp
         ports:
-        - containerPort: 80
+        - containerPort: 3000
           protocol: TCP 
 
 ---
@@ -41,13 +41,13 @@ spec:
 
 ---
 
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: nodeapp-ingress
-spec:
-  defaultBackend:
-    service:
-      name: nodeapp
-      port:
-        number: 80
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: nodeapp-ingress
+# spec:
+#   defaultBackend:
+#     service:
+#       name: nodeapp
+#       port:
+#         number: 80
