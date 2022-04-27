@@ -1,25 +1,30 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  creationTimestamp: null
+  labels:
+    app: nodeapp
   name: nodeapp
-  namespace: default
 spec:
   replicas: 2
   selector:
     matchLabels:
-      run: nodeapp
+      app: nodeapp
   strategy: {}
   template:
     metadata:
+      creationTimestamp: null
       labels:
-        run: nodeapp
+        app: nodeapp
     spec:
       containers:
       - image: gcr.io/wideops-candidate6/omar-nodeapp:test
-        imagePullPolicy: IfNotPresent
         name: nodeapp
+        imagePullPolicy: Always
+        resources: {}
         ports:
-        - containerPort:
+        - containerPort: 80 
+status: {}
 
 ---
 
