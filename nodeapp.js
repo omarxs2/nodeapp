@@ -6,10 +6,10 @@ const app = express();
 app.set('view engine', 'ejs');
 
 app.use(express.urlencoded({ extended: false }));
+
 const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  serverSelectionTimeoutMS: 5000,
   autoIndex: false, // Don't build indexes
   maxPoolSize: 10, // Maintain up to 10 socket connections
   serverSelectionTimeoutMS: 5000, // Keep trying to send operations for 5 seconds
