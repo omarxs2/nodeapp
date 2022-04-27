@@ -15,11 +15,11 @@ spec:
         run: nodeapp
     spec:
       containers:
-      - image: gcr.io/wideops-candidate6/omar-nodeapp:test
+      - image: gcr.io/wideops-candidate6/omar-nodeapp:v2
         imagePullPolicy: IfNotPresent
         name: nodeapp
         ports:
-        - containerPort: 80
+        - containerPort: 3000
 
 ---
 
@@ -55,7 +55,7 @@ kind: Ingress
 metadata:
   name: managed-ingress
   annotations:
-    kubernetes.io/ingress.global-static-ip-name: my-global-2
+    kubernetes.io/ingress.global-static-ip-name: nodeapp-static-ip
     networking.gke.io/managed-certificates: my-cert
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
