@@ -15,7 +15,7 @@ spec:
         run: nodeapp
     spec:
       containers:
-      - image: gcr.io/wideops-candidate6/omar-nodeapp:test
+      - image: gcr.io/wideops-candidate6/omar-nodeapp:v2
         imagePullPolicy: IfNotPresent
         name: nodeapp
         ports:
