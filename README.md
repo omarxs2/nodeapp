@@ -13,9 +13,9 @@ gcloud container clusters create nodeapp-cluster \
     --project=wideops-candidate6 \
     --zone=us-central1-c
 
-docker build -t gcr.io/wideops-candidate6/omar-nodeapp:test .
+docker build -t gcr.io/wideops-candidate6/omar-nodeapp:v2 .
 
-docker push gcr.io/wideops-candidate6/omar-nodeapp:test
+docker push gcr.io/wideops-candidate6/omar-nodeapp:v2
 
 gcloud container clusters get-credentials "nodeapp-cluster" \
             --project "wideops-candidate6" \
