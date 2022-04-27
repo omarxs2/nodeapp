@@ -19,7 +19,7 @@ spec:
         imagePullPolicy: IfNotPresent
         name: nodeapp
         ports:
-        - containerPort: 3000
+        - containerPort: 80
           protocol: TCP 
 
 ---
@@ -37,7 +37,7 @@ spec:
     name: http
   selector:
     run: nodeapp
-  type: LoadBalancer
+  type: NodePort
 
 ---
 
